@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Form from "./Form.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    counter: 0,
+  };
+
+  handleClick = () => {
+    this.setState({
+      counter: this.state.counter + 1,
+    });
+  };
+
+  handleDelete = () => {
+    this.setState({
+      counter: this.state.counter - 1,
+    });
+  };
+
+  render() {
+    let forms = [];
+    for (var i = 0; i < this.state.counter; i++) {
+      forms.push(<Form key={i} handleDelete={this.handleDelete} />);
+    }
+
+    return (
+      <div className="App">
+        <h3>Form</h3>
+        <button onClick={this.handleClick}>Add new step</button>
+        {forms}
+      </div>
+    );
+  }
 }
 
 export default App;
